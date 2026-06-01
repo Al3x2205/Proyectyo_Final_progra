@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SimuladorBO – Crisis, Abastecimiento y Economía Familiar</title>
+    <link rel="stylesheet" href="../CSS/estilo.css">
+</head>
+<body>
+
+    <header>
+        <h1>⚖️ SimuladorBO: Crisis y Desabastecimiento</h1>
+        <p>Análisis interactivo del contexto socioeconómico actual en Bolivia (2024 - 2026)</p>
+    </header>
+
+    <nav class="tabs-container">
+        <button class="tab-btn active" onclick="cambiarPestaña('contexto')">Contexto</button>
+        <button class="tab-btn" onclick="cambiarPestaña('carburante')">A: Carburantes</button>
+        <button class="tab-btn" onclick="cambiarPestaña('alimentos')">B: Precios</button>
+        <button class="tab-btn" onclick="cambiarPestaña('transporte')">C: Transporte</button>
+        <button class="tab-btn" onclick="cambiarPestaña('compras')">D: Compras</button>
+        <button class="tab-btn" onclick="cambiarPestaña('rumor')">E: Escasez</button>
+        <button class="tab-btn" onclick="cambiarPestaña('poder-adquisitivo')">F: Poder Adq.</button>
+        <button class="tab-btn" onclick="cambiarPestaña('matematicas')">Algoritmo</button>
+        <button class="tab-btn" onclick="cambiarPestaña('info-extra')">Casos y Créditos</button>
+    </nav>
+
+    <main>
+
+        <section id="contexto" class="tab-content active">
+            <center><img src="../IMG/mapa-bolivia-mapa-linea-malla-poligonal-mapa-bandera_559531-11675.jpg" alt="Contexto Bolivia" class="img-contexto"></center>
+            <h2>Contexto del Problema</h2>
+            <p>Bolivia atraviesa una compleja coyuntura socioeconómica caracterizada por la escasez de divisas extranjeras (dólares), dificultades logísticas en la importación y distribución de carburantes controlados por YPFB, bloqueos constantes de carreteras troncales y un incremento generalizado en los precios de la canasta familiar básica.</p>
+            
+            <p><strong>Impactos principales:</strong></p>
+            <ul>
+                <li><strong>⛽ Carburantes:</strong> Escasez y largas filas en estaciones de servicio afectan el abastecimiento diario.</li>
+                <li><strong>🛒 Precios:</strong> Los alimentos de la canasta básica suben de precio, reduciendo el poder adquisitivo.</li>
+                <li><strong>🚌 Transporte:</strong> Bloqueos y desvíos encarecen el traslado de personas y mercancías.</li>
+            </ul>
+
+            <p><em>Nota: Este proyecto es de carácter educativo. No toma posición política; busca demostrar con modelos matemáticos sencillos cómo distintos factores afectan la economía cotidiana.</em></p>
+        </section>
+
+        <section id="carburante" class="tab-content">
+            <h2>⛽ Simulador A: Abastecimiento de Carburantes</h2>
+            <center><img src="../IMG/primer-plano-boquilla-combustible-detalle-bomba-gas-naranja-negra_191095-77573.avif" alt="Surtidor YPFB" class="img-contexto"></center>
+            <p>Calcula cuántos días durará la reserva de un surtidor según el consumo y el reabastecimiento diario.</p>
+            <form id="form-carburante" onsubmit="return false;">
+                <div class="input-group">
+                    <label for="carb-reserva">Reserva Inicial (Litros):</label>
+                    <input type="number" id="carb-reserva" placeholder="Ej. 10000" value="10000" min="0">
+                </div>
+                <div class="input-group">
+                    <label for="carb-consumo">Consumo Diario Estimado (Litros):</label>
+                    <input type="number" id="carb-consumo" placeholder="Ej. 1200" value="1200" min="0">
+                </div>
+                <div class="input-group">
+                    <label for="carb-reabasto">Reabastecimiento Diario (Litros):</label>
+                    <input type="number" id="carb-reabasto" placeholder="Ej. 300" value="300" min="0">
+                </div>
+                <div class="input-group">
+                    <label for="carb-critico">Nivel Crítico de Alerta (Litros):</label>
+                    <input type="number" id="carb-critico" placeholder="Ej. 2000" value="2000" min="0">
+                </div>
+                <div class="btn-group">
+                    <button type="button" class="btn-calc" onclick="simularCarburante()">Simular Días ⚡</button>
+                    <button type="reset" class="btn-reset">Limpiar 🗑️</button>
+                </div>
+            </form>
+            <div id="res-carburante" class="resultado-box" style="display:none;"></div>
+        </section>
+
+        <section id="alimentos" class="tab-content">
+            <h2>🛒 Simulador B: Precios de Alimentos</h2>
+            <center><img src="../IMG/verdu_1.jpg" alt="Mercado Local" class="img-contexto"></center>
+            <p>Calcula el impacto del aumento de precios de productos básicos en el gasto familiar.</p>
+            <form id="form-alimentos" onsubmit="return false;">
+                <div class="input-group">
+                    <label for="ali-anterior">Precio Anterior del Producto (Bs):</label>
+                    <input type="number" id="ali-anterior" placeholder="Ej. 8" value="8" step="0.01">
+                </div>
+                <div class="input-group">
+                    <label for="ali-actual">Precio Actual en el Mercado (Bs):</label>
+                    <input type="number" id="ali-actual" placeholder="Ej. 11" value="11" step="0.01">
+                </div>
+                <div class="input-group">
+                    <label for="ali-cantidad">Cantidad Consumida por Semana:</label>
+                    <input type="number" id="ali-cantidad" placeholder="Ej. 10" value="10" min="0">
+                </div>
+                <div class="input-group">
+                    <label for="ali-semanas">Semanas a Evaluar (Mes = 4):</label>
+                    <input type="number" id="ali-semanas" placeholder="Ej. 4" value="4" min="1">
+                </div>
+                <div class="btn-group">
+                    <button type="button" class="btn-calc" onclick="simularAlimentos()">Calcular Incremento ⚡</button>
+                    <button type="reset" class="btn-reset">Limpiar 🗑️</button>
+                </div>
+            </form>
+            <div id="res-alimentos" class="resultado-box" style="display:none;"></div>
+        </section>
+
+        <section id="transporte" class="tab-content">
+            <h2>🚌 Simulador C: Costo de Transporte</h2>
+            <center><img src="../IMG/la-paz-bolivia-october-10-600nw-2399341427.webp" alt="Bloqueo Carretero" class="img-contexto"></center>
+            <p>Estima cuánto aumenta el gasto operativo de transporte cuando hay desvíos o bloqueos de rutas.</p>
+            <form id="form-transporte" onsubmit="return false;">
+                <div class="input-group">
+                    <label for="trans-normal">Distancia Ruta Normal (Km):</label>
+                    <input type="number" id="trans-normal" value="10" step="0.1">
+                </div>
+                <div class="input-group">
+                    <label for="trans-desvio">Distancia con Desvío (Km):</label>
+                    <input type="number" id="trans-desvio" value="16" step="0.1">
+                </div>
+                <div class="input-group">
+                    <label for="trans-costo-km">Costo Operativo por Km (Bs):</label>
+                    <input type="number" id="trans-costo-km" value="2" step="0.01">
+                </div>
+                <div class="input-group">
+                    <label for="trans-viajes">Viajes por Semana:</label>
+                    <input type="number" id="trans-viajes" value="5" min="0">
+                </div>
+                <div class="btn-group">
+                    <button type="button" class="btn-calc" onclick="simularTransporte()">Calcular Gasto Extra ⚡</button>
+                    <button type="reset" class="btn-reset">Limpiar 🗑️</button>
+                </div>
+            </form>
+            <div id="res-transporte" class="resultado-box" style="display:none;"></div>
+        </section>
+
+        <section id="compras" class="tab-content">
+            <h2>💰 Simulador D: Compras Familiares</h2>
+            <center><img src="../IMG/Las-compras-digitales-crecen-en-Bolivia.jpg" alt="Compras Familiares" class="img-contexto"></center>
+            <p>Verifica si el presupuesto familiar alcanza para cubrir la lista de compras actual.</p>
+            <form id="form-compras" onsubmit="return false;">
+                <div class="input-group">
+                    <label for="comp-presupuesto">Presupuesto Familiar (Bs):</label>
+                    <input type="number" id="comp-presupuesto" value="500" step="0.01">
+                </div>
+                <div class="input-group">
+                    <label for="comp-total">Costo Total de la Compra Requerida (Bs):</label>
+                    <input type="number" id="comp-total" value="580" step="0.01">
+                </div>
+                <div class="btn-group">
+                    <button type="button" class="btn-calc" onclick="simularCompras()">Verificar Saldo ⚡</button>
+                    <button type="reset" class="btn-reset">Limpiar 🗑️</button>
+                </div>
+            </form>
+            <div id="res-compras" class="resultado-box" style="display:none;"></div>
+        </section>
+
+        <section id="rumor" class="tab-content">
+            <h2>📢 Simulador E: Rumor de Escasez</h2>
+            <center><img src="../IMG/images.jpg" alt="Rumor de Escasez" class="img-contexto"></center>
+            <p>Simula cómo un rumor dispara la demanda por pánico y agota el stock disponible rápidamente.</p>
+            <form id="form-rumor" onsubmit="return false;">
+                <div class="input-group">
+                    <label for="rum-demanda">Demanda Normal (Unidades/Día):</label>
+                    <input type="number" id="rum-demanda" value="100" min="0">
+                </div>
+                <div class="input-group">
+                    <label for="rum-porcentaje">Aumento por Rumor/Psicosis (%):</label>
+                    <input type="number" id="rum-porcentaje" value="40" min="0">
+                </div>
+                <div class="input-group">
+                    <label for="rum-stock">Stock Disponible en Tiendas:</label>
+                    <input type="number" id="rum-stock" value="120" min="0">
+                </div>
+                <div class="btn-group">
+                    <button type="button" class="btn-calc" onclick="simularRumor()">Analizar Demanda ⚡</button>
+                    <button type="reset" class="btn-reset">Limpiar 🗑️</button>
+                </div>
+            </form>
+            <div id="res-rumor" class="resultado-box" style="display:none;"></div>
+        </section>
+
+        <section id="poder-adquisitivo" class="tab-content">
+            <h2>📉 Simulador F: Pérdida del Poder Adquisitivo</h2>
+            <center><img src="../IMG/perdida-salario-1-junio.jpg" alt="Poder Adquisitivo" class="img-contexto"></center>
+            <p>Calcula cuánto menos puede comprar una familia cuando los precios suben pero el ingreso se mantiene.</p>
+            <form id="form-poder" onsubmit="return false;">
+                <div class="input-group">
+                    <label for="pod-ingreso">Ingreso Familiar Mensual Fijo (Bs):</label>
+                    <input type="number" id="pod-ingreso" value="2500" step="0.01">
+                </div>
+                <div class="input-group">
+                    <label for="pod-gasto-ant">Gasto Mensual Canasta Anterior (Bs):</label>
+                    <input type="number" id="pod-gasto-ant" value="1800" step="0.01">
+                </div>
+                <div class="input-group">
+                    <label for="pod-gasto-act">Gasto Mensual Canasta Actual (Bs):</label>
+                    <input type="number" id="pod-gasto-act" value="2300" step="0.01">
+                </div>
+                <div class="btn-group">
+                    <button type="button" class="btn-calc" onclick="simularPoderAdquisitivo()">Calcular Afectación ⚡</button>
+                    <button type="reset" class="btn-reset">Limpiar 🗑️</button>
+                </div>
+            </form>
+            <div id="res-poder" class="resultado-box" style="display:none;"></div>
+        </section>
+
+        <section id="matematicas" class="tab-content">
+            <h2>🔢 Algoritmo: Serie de Fibonacci</h2>
+            <p>Cálculo lógico matemático estructural para validar procesos iterativos en la programación del DOM.</p>
+            <form id="form-fibo" onsubmit="return false;">
+                <div class="input-group">
+                    <label for="fibo-limite">Cantidad de Términos a Generar:</label>
+                    <input type="number" id="fibo-limite" min="1" max="50" value="10">
+                </div>
+                <div class="btn-group">
+                    <button type="button" class="btn-calc" onclick="generarFibonacci()">Ejecutar Algoritmo ⚡</button>
+                    <button type="reset" class="btn-reset">Limpiar 🗑️</button>
+                </div>
+            </form>
+            <div id="res-fibo" class="resultado-box" style="display:none;"></div>
+        </section>
+
+        <section id="info-extra" class="tab-content">
+            <h2>📋 Casos de Estudio para Probar</h2>
+            <p>Puedes utilizar estos datos base en los simuladores para verificar su funcionamiento:</p>
+            <ul>
+                <li><strong>Caso A (Carburantes):</strong> Reserva: 10,000 | Consumo: 1,200 | Reabastecimiento: 300 | Crítico: 2,000. <em>(Espera: Alerta cerca del día 9)</em>.</li>
+                <li><strong>Caso B (Alimentos):</strong> Precio Ant: 8 Bs | Act: 11 Bs | Cantidad: 10 | Semanas: 4. <em>(Espera: Incremento mensual de +120 Bs)</em>.</li>
+                <li><strong>Caso C (Transporte):</strong> Distancia Normal: 10 km | Desvío: 16 km | Costo/km: 2 Bs | Viajes: 5. <em>(Espera: Gasto extra de 60 Bs semanales)</em>.</li>
+            </ul>
+
+            <h2 style="margin-top: 2rem;">💡 Conclusiones</h2>
+            <p>Con operaciones básicas es posible representar problemas reales. Mostrar resultados de forma visual facilita la comprensión de fenómenos económicos y demuestra la utilidad del DOM y la lógica en JavaScript en situaciones cotidianas.</p>
+
+            <h2 style="margin-top: 2rem;">🎓 Créditos del Proyecto</h2>
+            <p><strong>Materia:</strong> Programación Web I<br>
+               <strong>Título:</strong> SimuladorBO – Final Lap<br>
+               <strong>Tecnologías:</strong> HTML5 · CSS3 · JavaScript Puro · DOM</p>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>Materia: Programación Web I | Final Lap - Solución Bolivia</p>
+        <p>Desarrollado con HTML5, CSS3 y JavaScript puro.</p>
+    </footer>
+
+    <script src="../JAVASCRIPT/1.js"></script>
+</body>
+</html>

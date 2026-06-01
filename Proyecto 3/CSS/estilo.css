@@ -1,0 +1,385 @@
+
+:root {
+    --bg-main: #0b0f19;           
+    --bg-card: #151f32;         
+    --bg-input: #0e1624;         
+    --color-primary: #0ea5e9;    
+    --color-primary-glow: rgba(14, 165, 233, 0.2);
+    --color-success: #10b981;    
+    --color-success-glow: rgba(16, 185, 129, 0.25);
+    --color-danger: #f43f5e;     
+    --color-danger-glow: rgba(244, 63, 94, 0.2);
+    --text-main: #f8fafc;        
+    --text-muted: #64748b;        
+    --border-color: #243552;      
+    --radius-lg: 16px;            
+    --radius-md: 8px;             
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+::-webkit-scrollbar-track {
+    background: var(--bg-main);
+}
+::-webkit-scrollbar-thumb {
+    background: var(--border-color);
+    border-radius: 20px;
+    border: 2px solid var(--bg-main);
+}
+::-webkit-scrollbar-thumb:hover {
+    background: var(--color-primary);
+}
+
+.img-contexto {
+    width: 100%;
+    max-width: 520px;             /* Ancho ideal máximo en pantalla */
+    height: 260px;                /* Altura fija unificada para todos los simuladores */
+    object-fit: cover;            /* Recorte inteligente: llena el espacio estéticamente */
+    object-position: center;      /* Centra el foco de la fotografía */
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border-color);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
+    margin: 1rem auto 1.5rem auto;
+    display: block;
+    transition: var(--transition);
+}
+
+/* Efecto dinámico sutil al pasar el cursor sobre las imágenes */
+.img-contexto:hover {
+    transform: scale(1.02);
+    border-color: var(--color-primary);
+    box-shadow: 0 12px 28px var(--color-primary-glow);
+}
+
+/* Eliminar márgenes por defecto heredados del tag <center> */
+center {
+    display: block;
+    width: 100%;
+}
+
+/* 4. CABECERA DINÁMICA (HEADER) */
+header {
+    text-align: center;
+    padding: 3rem 1.5rem;
+    background: radial-gradient(circle at top, #1e293b 0%, var(--bg-main) 80%);
+    border-bottom: 1px solid var(--border-color);
+}
+
+header h1 {
+    font-size: 2.4rem;
+    font-weight: 800;
+    margin: 0 0 0.75rem 0;
+    letter-spacing: -0.03em;
+    background: linear-gradient(135deg, #ffffff 30%, var(--color-primary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+header p {
+    color: var(--text-muted);
+    font-size: 1.15rem;
+    margin: 0;
+    font-weight: 400;
+}
+
+/* 5. MENÚ DE PESTAÑAS (NAV TABS) */
+.tabs-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 1rem;
+    background-color: rgba(11, 15, 25, 0.8);
+    backdrop-filter: blur(12px);   /* Efecto cristal esmerilado translúcido */
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    border-bottom: 1px solid var(--border-color);
+}
+
+/* Botones de pestañas individuales */
+.tab-btn {
+    background-color: var(--bg-card);
+    color: #94a3b8;
+    border: 1px solid var(--border-color);
+    padding: 0.65rem 1.25rem;
+    border-radius: 30px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: var(--transition);
+}
+
+.tab-btn:hover {
+    color: var(--text-main);
+    border-color: var(--color-primary);
+    background-color: #1c2a45;
+    transform: translateY(-1px);
+}
+
+/* Pestaña Activa con Brillo Verde Esmeralda */
+.tab-btn.active {
+    background-color: var(--color-success);
+    color: #ffffff;
+    border-color: var(--color-success);
+    box-shadow: 0 0 15px var(--color-success-glow);
+}
+
+/* 6. CONTENEDOR PRINCIPAL Y TARJETAS DE CONTENIDO */
+main {
+    max-width: 800px;
+    margin: 2.5rem auto;
+    padding: 0 1.5rem;
+}
+
+.tab-content {
+    display: none;                /* Oculto por defecto, controlado por tu JS */
+    background-color: var(--bg-card);
+    padding: 2.5rem;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border-color);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
+}
+
+/* Clase activa con animación de entrada fluida y elegante */
+.tab-content.active {
+    display: block;
+    animation: fadeUpIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes fadeUpIn {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.tab-content h2 {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    border-left: 4px solid var(--color-primary);
+    padding-left: 12px;
+}
+
+.tab-content p {
+    color: #94a3b8;
+    font-size: 1.05rem;
+    line-height: 1.7;
+}
+
+/* 7. RE-ESTRUCTURACIÓN VISUAL DE FORMULARIOS E INPUTS */
+/* Distribución inteligente en dos columnas paralelas para PC */
+form {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+    margin-top: 1.5rem;
+}
+
+/* El simulador de transporte tiene código suelto en el HTML, este selector 
+   asegura que mantenga el mismo orden estético aunque no tenga la etiqueta form activa */
+#transporte .input-group,
+#transporte .btn-group {
+    margin-bottom: 1.25rem;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #cbd5e1;
+    transition: var(--transition);
+}
+
+/* Contenedor enfocado activa cambio de color en el texto */
+.input-group:focus-within label {
+    color: var(--color-primary);
+}
+
+input {
+    background-color: var(--bg-input);
+    color: #ffffff;
+    border: 1px solid var(--border-color);
+    padding: 0.8rem 1rem;
+    border-radius: var(--radius-md);
+    font-size: 1rem;
+    font-family: inherit;
+    transition: var(--transition);
+    width: 100%;
+}
+
+input:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    background-color: #131e33;
+    box-shadow: 0 0 0 4px var(--color-primary-glow);
+}
+
+/* Ocultar flechas nativas molestas de inputs numéricos */
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance: none; 
+    margin: 0; 
+}
+
+/* 8. BOTONES DE ACCIÓN ASIMÉTRICOS (CALCULAR / LIMPIAR) */
+.btn-group {
+    grid-column: 1 / -1;          /* Ocupa el ancho completo horizontal */
+    display: flex;
+    gap: 1rem;
+    margin-top: 0.75rem;
+}
+
+.btn-calc {
+    background: linear-gradient(135deg, var(--color-primary) 0%, #0284c7 100%);
+    color: var(--bg-main);
+    font-weight: 700;
+    font-size: 1rem;
+    border: none;
+    padding: 0.85rem 2rem;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    flex: 2;                      /* El botón de calcular es más ancho e importante */
+    transition: var(--transition);
+    box-shadow: 0 4px 12px rgba(14, 165, 233, 0.25);
+}
+
+.btn-calc:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(14, 165, 233, 0.4);
+    filter: brightness(1.1);
+}
+
+.btn-calc:active {
+    transform: translateY(0);
+}
+
+.btn-reset {
+    background-color: #334155;
+    color: #f1f5f9;
+    font-weight: 600;
+    font-size: 1rem;
+    border: 1px solid #475569;
+    padding: 0.85rem;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    flex: 1;                      /* El botón de limpiar es más compacto */
+    transition: var(--transition);
+}
+
+.btn-reset:hover {
+    background-color: #475569;
+    color: #ffffff;
+}
+
+/* 9. CONTENEDOR DINÁMICO DE RESULTADOS (INYECTADOS POR JS) */
+.resultado-box {
+    grid-column: 1 / -1;
+    margin-top: 1.5rem;
+    padding: 1.25rem 1.5rem;
+    border-radius: var(--radius-md);
+    font-size: 1.05rem;
+    font-weight: 500;
+    line-height: 1.6;
+    border: 1px solid var(--border-color);
+    background-color: var(--bg-input);
+    /* Estilos base por si tu JS inyecta texto directo */
+    animation: fadeUpIn 0.3s ease-out forwards;
+}
+
+/* Clases de respuesta de alertas (Asegúrate que tu JS las use para un look Pro) */
+.estilo-ok {
+    border-color: var(--color-success);
+    background: linear-gradient(to right, rgba(16, 185, 129, 0.08), rgba(16, 185, 129, 0.01));
+    color: #a7f3d0;
+}
+
+.estilo-alerta {
+    border-color: var(--color-danger);
+    background: linear-gradient(to right, rgba(244, 63, 94, 0.08), rgba(244, 63, 94, 0.01));
+    color: #fecdd3;
+}
+
+/* 10. PIE DE PÁGINA (FOOTER) */
+footer {
+    text-align: center;
+    padding: 3rem 1rem;
+    margin-top: 5rem;
+    border-top: 1px solid var(--border-color);
+    background-color: #080b12;
+    color: var(--text-muted);
+    font-size: 0.95rem;
+}
+
+footer p {
+    margin: 0;
+    letter-spacing: 0.02em;
+}
+
+/* ==========================================================================
+   11. ADAPTABILIDAD TOTAL (DISEÑO RESPONSIVO PARA CELULARES)
+   ========================================================================== */
+@media (max-width: 768px) {
+    header {
+        padding: 2rem 1rem;
+    }
+
+    header h1 {
+        font-size: 1.75rem;
+    }
+
+    /* En celulares los campos se apilan de manera vertical automáticamente */
+    form {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .tab-content {
+        padding: 1.5rem;
+        margin: 0 0.5rem;
+    }
+
+    .img-contexto {
+        height: 180px;            /* Reduce la escala de las imágenes en pantallas chicas */
+    }
+
+    /* Permite deslizar los botones lateralmente con el dedo si no caben en el teléfono */
+    .tabs-container {
+        justify-content: flex-start;
+        overflow-x: auto;
+        white-space: nowrap;
+        padding: 0.75rem;
+    }
+
+    .tab-btn {
+        padding: 0.5rem 1rem;
+        font-size: 0.85rem;
+    }
+}
