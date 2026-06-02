@@ -54,9 +54,8 @@ En cumplimiento estricto de los requisitos lógicos avanzados exigidos en la eva
 
 ---
 
-## 📂 5. Arquitectura del Repositorio y Links Directos (8/8 pts)
+## 📂 5. Arquitectura del Repositorio y Links Directos
 El proyecto se encuentra organizado meticulosamente en directorios independientes para facilitar su auditoría técnica:
-
 ```text
 ├── README.md               # Documentación general del repositorio (Este archivo) 
 ├── Proyecto 1/             # Código fuente del Maquetado Base (Estructura Inicial)
