@@ -7,7 +7,7 @@ Este repositorio contiene el desarrollo del **Desafío Final de Programación We
 ## 👤 Información del Estudiante y Entregables
 * **Nombre del Estudiante:** [Alexander Eleazar Conde Ordoñez]
 * **Materia:** Programación Web I 
-* **Enlace del Repositorio Git:** [Pega aquí el enlace de este repositorio]
+* **Enlace del Repositorio Git:** [https://github.com/Al3x2205/Proyectyo_Final_progra]
 * **Enlace de la Página Publicada:** [(https://al3x2205.github.io/Proyectyo_Final_progra/Proyecto%201/HTML/index1.html
 https://al3x2205.github.io/Proyectyo_Final_progra/Proyecto%202/HTML/index2.html
 https://al3x2205.github.io/Proyectyo_Final_progra/Proyecto%203/HTML/index3.html
